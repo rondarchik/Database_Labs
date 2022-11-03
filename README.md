@@ -1,2 +1,2 @@
-# Database_Labs
-Repo for labs on Data Models and Database Management Systems 
+# Довгун Виктория Александровна | 053502
+## Тема: Туристическое агентство
