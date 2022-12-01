@@ -1,1 +1,1 @@
-[Ссылочка](https://drawsql.app/teams/rondarchik/diagrams/database-model-postgre)
+[Ссылочка](https://drawsql.app/teams/rondarchik/diagrams/travelagency)
