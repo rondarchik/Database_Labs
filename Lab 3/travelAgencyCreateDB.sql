@@ -1,6 +1,4 @@
 -- DROP tables
--- DROP TABLE IF EXISTS Admins, Bookings, Cities, Clients, Countries, CreditCards, Hotels, Logs, Managers, Reviews, TourOrdering, Tours, TourTypes, Users;
-
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
@@ -18,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Clients
 	id INT NOT NULL PRIMARY KEY REFERENCES Users(id),
     surname VARCHAR(100) NOT NULL,
     patronymic VARCHAR(100) NOT NULL,
-    phone VARCHAR(17) NOT NULL UNIQUE, --Max: +375-11-111-11-11
+    phone VARCHAR(17) NOT NULL, 
     birthday DATE NOT NULL,
     client_address VARCHAR(255) NULL
 );
