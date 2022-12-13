@@ -83,25 +83,36 @@ INSERT INTO Hotels(hotel_name, hotel_rating, city_id, price_per_night) VALUES
 INSERT INTO TourTypes(type_name) VALUES 
 					 ('Экскурсионный'), ('Оздоровительный'), ('Горнолыжный'), ('Отдых на море'), ('Горящие путевки');
 
-INSERT INTO Tours(start_date, end_date, type_id, hotel_id, total_price) VALUES 
-				 ('2023-03-20', '2023-03-24', (SELECT id FROM TourTypes WHERE type_name='Экскурсионный'),
-				  		(SELECT id FROM Hotels WHERE hotel_name='Club House Roma'),
-				  		((SELECT price_per_night FROM Hotels WHERE hotel_name='Club House Roma')*4)),
-				 ('2023-02-12', '2023-02-25', (SELECT id FROM TourTypes WHERE type_name='Оздоровительный'),
-				  		(SELECT id FROM Hotels WHERE hotel_name='Санаторий Сосны'),
-				  		((SELECT price_per_night FROM Hotels WHERE hotel_name='Санаторий Сосны')*13)),
-				 ('2023-04-20', '2023-04-26', (SELECT id FROM TourTypes WHERE type_name='Экскурсионный'),
-				  		(SELECT id FROM Hotels WHERE hotel_name='The Duke Boutique Suites'),
-				  		((SELECT price_per_night FROM Hotels WHERE hotel_name='The Duke Boutique Suites')*6)),
-				 ('2023-06-13', '2023-06-20', (SELECT id FROM TourTypes WHERE type_name='Отдых на море'),
-				  		(SELECT id FROM Hotels WHERE hotel_name='The Duke Boutique Suites'),
-				  		((SELECT price_per_night FROM Hotels WHERE hotel_name='The Duke Boutique Suites')*7)),
-				 ('2022-12-20', '2022-12-27', (SELECT id FROM TourTypes WHERE type_name='Горящие путевки'),
-				  		(SELECT id FROM Hotels WHERE hotel_name='Taksim Fidan Residence Deluxe'),
-				  		((SELECT price_per_night FROM Hotels WHERE hotel_name='Taksim Fidan Residence Deluxe')*7)),
-				 ('2023-01-16', '2023-01-21', (SELECT id FROM TourTypes WHERE type_name='Горнолыжный'),
-				  		(SELECT id FROM Hotels WHERE hotel_name='Apartaments Gran Vall'),
-				  		((SELECT price_per_night FROM Hotels WHERE hotel_name='Apartaments Gran Vall')*5));
+INSERT INTO Tours(tour_name, start_date, end_date, type_id, hotel_id, total_price) VALUES 
+				 ('Какое-то название 1', '2023-03-20', '2023-03-24', 
+				  (SELECT id FROM TourTypes WHERE type_name='Экскурсионный'),
+				  (SELECT id FROM Hotels WHERE hotel_name='Club House Roma'),
+				  ((SELECT price_per_night FROM Hotels WHERE hotel_name='Club House Roma')*4)),
+				  
+				 ('Какое-то название 2', '2023-02-12', '2023-02-25', 
+				  (SELECT id FROM TourTypes WHERE type_name='Оздоровительный'),
+				  (SELECT id FROM Hotels WHERE hotel_name='Санаторий Сосны'),
+				  ((SELECT price_per_night FROM Hotels WHERE hotel_name='Санаторий Сосны')*13)),
+				  
+				 ('Какое-то название 3', '2023-04-20', '2023-04-26', 
+				  (SELECT id FROM TourTypes WHERE type_name='Экскурсионный'),
+				  (SELECT id FROM Hotels WHERE hotel_name='The Duke Boutique Suites'),
+				  ((SELECT price_per_night FROM Hotels WHERE hotel_name='The Duke Boutique Suites')*6)),
+				  
+				 ('Какое-то название 4', '2023-06-13', '2023-06-20', 
+				  (SELECT id FROM TourTypes WHERE type_name='Отдых на море'),
+				  (SELECT id FROM Hotels WHERE hotel_name='The Duke Boutique Suites'),
+				  ((SELECT price_per_night FROM Hotels WHERE hotel_name='The Duke Boutique Suites')*7)),
+				  
+				 ('Какое-то название 5', '2022-12-20', '2022-12-27', 
+				  (SELECT id FROM TourTypes WHERE type_name='Горящие путевки'),
+				  (SELECT id FROM Hotels WHERE hotel_name='Taksim Fidan Residence Deluxe'),
+				  ((SELECT price_per_night FROM Hotels WHERE hotel_name='Taksim Fidan Residence Deluxe')*7)),
+				  
+				 ('Какое-то название 6', '2023-01-16', '2023-01-21', 
+				  (SELECT id FROM TourTypes WHERE type_name='Горнолыжный'),
+				  (SELECT id FROM Hotels WHERE hotel_name='Apartaments Gran Vall'),
+				  ((SELECT price_per_night FROM Hotels WHERE hotel_name='Apartaments Gran Vall')*5));
 						
 INSERT INTO Bookings(client_id, manager_id, tour_id, status) VALUES
 					((SELECT id FROM Clients WHERE surname='Дворник'), 2, 1, true),
