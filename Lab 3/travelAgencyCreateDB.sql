@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS Clients
     surname VARCHAR(100) NOT NULL,
     patronymic VARCHAR(100) NOT NULL,
     phone VARCHAR(17) NOT NULL, 
-    birthday DATE NOT NULL,
-    client_address VARCHAR(255) NULL
+    birthday DATE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Managers
@@ -43,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Cities
 	city_name VARCHAR(100) NOT NULL,
 	country_id INT NOT NULL,
 	
-	CONSTRAINT FK_City_Country FOREIGN KEY (country_id) REFERENCES Countries(id)
+	CONSTRAINT FK_City_Country FOREIGN KEY (country_id) REFERENCES Countries(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Hotels
@@ -57,7 +56,7 @@ CREATE TABLE IF NOT EXISTS Hotels
 	
 	CONSTRAINT positive_price CHECK (price_per_night > 0),
 	
-	CONSTRAINT FK_Hotels_City FOREIGN KEY (city_id) REFERENCES Cities(id)
+	CONSTRAINT FK_Hotels_City FOREIGN KEY (city_id) REFERENCES Cities(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS TourTypes
@@ -78,8 +77,8 @@ CREATE TABLE IF NOT EXISTS Tours
 	
 	CONSTRAINT positive_price CHECK (total_price > 0),
 	
-	CONSTRAINT FK_Tour_Type FOREIGN KEY (type_id) REFERENCES TourTypes(id),
-	CONSTRAINT FK_Tour_Hotel FOREIGN KEY (hotel_id) REFERENCES Hotels(id)
+	CONSTRAINT FK_Tour_Type FOREIGN KEY (type_id) REFERENCES TourTypes(id) ON DELETE CASCADE,
+	CONSTRAINT FK_Tour_Hotel FOREIGN KEY (hotel_id) REFERENCES Hotels(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Bookings
@@ -90,9 +89,9 @@ CREATE TABLE IF NOT EXISTS Bookings
 	tour_id INT NOT NULL,
 	status BOOLEAN NOT NULL,
 	
-	CONSTRAINT FK_Booking_Client FOREIGN KEY (client_id) REFERENCES Clients(id),
-	CONSTRAINT FK_Booking_Manager FOREIGN KEY (manager_id) REFERENCES Managers(id),
-	CONSTRAINT FK_Booking_Tour FOREIGN KEY (tour_id) REFERENCES Tours(id)
+	CONSTRAINT FK_Booking_Client FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE CASCADE,
+	CONSTRAINT FK_Booking_Manager FOREIGN KEY (manager_id) REFERENCES Managers(id) ON DELETE CASCADE,
+	CONSTRAINT FK_Booking_Tour FOREIGN KEY (tour_id) REFERENCES Tours(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS CreditCards
@@ -101,7 +100,7 @@ CREATE TABLE IF NOT EXISTS CreditCards
 	card_number VARCHAR(23) NOT NULL UNIQUE, --Max: XXXX-XXXX-XXXX-XXXX
 	client_id INT NOT NULL,
 	
-	CONSTRAINT FK_Card_Client FOREIGN KEY (client_id) REFERENCES Clients(id)
+	CONSTRAINT FK_Card_Client FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS TourOrdering
@@ -113,8 +112,8 @@ CREATE TABLE IF NOT EXISTS TourOrdering
 	
 	CONSTRAINT positive_price CHECK (total_price > 0),
 	
-	CONSTRAINT FK_Ordering_Booking FOREIGN KEY (booking_id) REFERENCES Bookings(id),
-	CONSTRAINT FK_Ordering_Card FOREIGN KEY (credit_card_id) REFERENCES CreditCards(id)	
+	CONSTRAINT FK_Ordering_Booking FOREIGN KEY (booking_id) REFERENCES Bookings(id) ON DELETE CASCADE,
+	CONSTRAINT FK_Ordering_Card FOREIGN KEY (credit_card_id) REFERENCES CreditCards(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Reviews
@@ -126,8 +125,8 @@ CREATE TABLE IF NOT EXISTS Reviews
 	tour_id INT NOT NULL,
 	publish_date DATE NOT NULL,
 	
-	CONSTRAINT FK_Review_Client FOREIGN KEY (client_id) REFERENCES Clients(id),
-	CONSTRAINT FK_Review_Tour FOREIGN KEY (tour_id) REFERENCES Tours(id)
+	CONSTRAINT FK_Review_Client FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE CASCADE,
+	CONSTRAINT FK_Review_Tour FOREIGN KEY (tour_id) REFERENCES Tours(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Logs
@@ -137,5 +136,5 @@ CREATE TABLE IF NOT EXISTS Logs
 	action_time TIMESTAMP NOT NULL,
 	action_info VARCHAR(100) NOT NULL,
 	
-	CONSTRAINT FK_Log_User FOREIGN KEY (user_id) REFERENCES Users(id)
+	CONSTRAINT FK_Log_User FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );

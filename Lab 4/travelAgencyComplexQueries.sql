@@ -32,41 +32,41 @@ SELECT Clients.surname, Bookings.id FROM Clients
 SELECT Bookings.id, CLients.surname FROM Bookings 
 	FULL JOIN Clients ON Bookings.client_id=Clients.id WHERE surname LIKE 'С%';
 	
--- Возвращает всех клиентов с одинаковым отчеством	
-SELECT A.surname AS surname1, B.surname AS surname2, A.patronymic FROM Clients A, Clients B
-	WHERE A.id <> B.id AND A.patronymic = B.patronymic;
+-- -- Возвращает всех клиентов с одинаковым отчеством	
+-- SELECT A.surname AS surname1, B.surname AS surname2, A.patronymic FROM Clients A, Clients B
+-- 	WHERE A.id <> B.id AND A.patronymic = B.patronymic;
 
 
---SELECT COUNT(id) FROM Countries; - 8
---SELECT COUNT(id) FROM Cities; - 13
-SELECT * FROM Countries, Cities;	--Аналогично: SELECT * FROM Countries CROSS JOIN Cities	
+-- --SELECT COUNT(id) FROM Countries; - 8
+-- --SELECT COUNT(id) FROM Cities; - 13
+-- SELECT * FROM Countries, Cities;	--Аналогично: SELECT * FROM Countries CROSS JOIN Cities	
 
 
-SELECT client_id FROM Bookings
-	UNION
-		SELECT id FROM Clients;
+-- SELECT client_id FROM Bookings
+-- 	UNION
+-- 		SELECT id FROM Clients;
 		
-SELECT client_id FROM Bookings
-	UNION ALL
-		SELECT id FROM Clients;
+-- SELECT client_id FROM Bookings
+-- 	UNION ALL
+-- 		SELECT id FROM Clients;
 		
--- Возвращает количество отелей в каждом городе		
-SELECT COUNT(hotel_name), city_id 
-	FROM Hotels GROUP BY city_id;
+-- -- Возвращает количество отелей в каждом городе		
+-- SELECT COUNT(hotel_name), city_id 
+-- 	FROM Hotels GROUP BY city_id;
 	
-SELECT COUNT(hotel_name), city_id 
-	FROM Hotels GROUP BY city_id HAVING COUNT(hotel_name) > 1;	
+-- SELECT COUNT(hotel_name), city_id 
+-- 	FROM Hotels GROUP BY city_id HAVING COUNT(hotel_name) > 1;	
 
--- Перечисляет клиентов, у которых одобрено бронирование
-SELECT surname FROM Clients WHERE EXISTS (
-	SELECT status FROM Bookings WHERE Bookings.client_id=Clients.id AND status=true);
+-- -- Перечисляет клиентов, у которых одобрено бронирование
+-- SELECT surname FROM Clients WHERE EXISTS (
+-- 	SELECT status FROM Bookings WHERE Bookings.client_id=Clients.id AND status=true);
 
-SELECT surname, birthday,
-	CASE
-		WHEN date_part('year', age(birthday)) > 18 THEN 'Взрослый'
-		WHEN date_part('year', age(birthday)) < 18 THEN 'Малой'
-		ELSE '18'
-	END AS age_text
-FROM Clients;
+-- SELECT surname, birthday,
+-- 	CASE
+-- 		WHEN date_part('year', age(birthday)) > 18 THEN 'Взрослый'
+-- 		WHEN date_part('year', age(birthday)) < 18 THEN 'Малой'
+-- 		ELSE '18'
+-- 	END AS age_text
+-- FROM Clients;
 
---??? EXPLAIN SELECT * FROM Clients WHERE patronymic='Александровна';
+-- --??? EXPLAIN SELECT * FROM Clients WHERE patronymic='Александровна';

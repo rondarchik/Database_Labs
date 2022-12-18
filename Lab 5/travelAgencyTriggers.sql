@@ -9,7 +9,7 @@ CREATE OR REPLACE FUNCTION manager_registrated_log()
 BEGIN
 
 	INSERT INTO Logs(user_id, action_time, action_info)
-		VALUES (NEW.id, now(), format('Менеджер %s %s', (SELECT name FROM Users WHERE id=NEW.id), 'зарегистрировался'));
+		VALUES (NEW.id, now(), format('Manager %s %s', (SELECT name FROM Users WHERE id=NEW.id), 'sign up'));
 	
 	RETURN NEW;
 
@@ -35,7 +35,7 @@ CREATE OR REPLACE FUNCTION client_registrated_log()
 BEGIN
 
 	INSERT INTO Logs(user_id, action_time, action_info)
-		VALUES (NEW.id, now(), format('Клиент %s %s', NEW.surname, 'зарегистрировался'));
+		VALUES (NEW.id, now(), format('Client %s %s', NEW.surname, 'sign up'));
 	
 	RETURN NEW;
 
@@ -71,7 +71,7 @@ BEGIN
 	SELECT surname FROM CLIENTS WHERE id=client INTO client_surname;
 	
 	INSERT INTO Logs(user_id, action_time, action_info)
-		VALUES (client, now(), format('Клиент %s %s %s', client_surname, 'добавил отзыв на тур: ', tour_title));
+		VALUES (client, now(), format('Client %s %s %s', client_surname, 'add review on tour: ', tour_title));
 	
 	RETURN NEW;
 
